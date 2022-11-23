@@ -20,6 +20,10 @@ class _MotionState extends State<Motion>
 
   dynamic getFeedbackFromSheet() async
   {
+    EasyLoading.show(
+      status: "Carregando",
+    );   
+    
     var response = await http.get(Uri.parse("https://script.google.com/macros/s/AKfycbybuJywbOWxpYSE-IP_RGUxciJ8jhJCdSjKEq3hO1gIFLx4qKZB7G4s9IlnIhUNP39h0Q/exec"));
   
     var jsonFeedback = convert.jsonDecode(response.body); 
@@ -35,12 +39,8 @@ class _MotionState extends State<Motion>
   void initState() {
     getFeedbackFromSheet();
     
-    EasyLoading.instance
-    ..userInteractions = false;
-
-    EasyLoading.show(
-      status: "Carregando",
-    );    
+    EasyLoading.instance.userInteractions = false;
+    
     super.initState();
   }
 
@@ -101,5 +101,7 @@ class _MotionState extends State<Motion>
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => const Home())
     );
+
+    if(EasyLoading.isShow) EasyLoading.dismiss();
   }
 }
