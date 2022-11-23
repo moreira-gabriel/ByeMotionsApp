@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bye_motions_app/feedback_form.dart';
 import 'package:bye_motions_app/views/home.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -26,11 +27,20 @@ class _MotionState extends State<Motion>
     setState(() {
       motionText.motionText = jsonFeedback["motion"];
     });
+
+    EasyLoading.dismiss();
   }
 
   @override
   void initState() {
     getFeedbackFromSheet();
+    
+    EasyLoading.instance
+    ..userInteractions = false;
+
+    EasyLoading.show(
+      status: "Carregando",
+    );    
     super.initState();
   }
 

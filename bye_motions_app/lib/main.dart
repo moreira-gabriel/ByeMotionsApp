@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bye_motions_app/views/home.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   runApp(
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: const Home(),
+      builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
     );
   }
